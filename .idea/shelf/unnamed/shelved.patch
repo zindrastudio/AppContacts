@@ -1,0 +1,56 @@
+Index: app/src/main/java/com/example/zivdrag/contactapplication/ProviderClass.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.zivdrag.contactapplication;\n\nimport android.support.v4.content.CursorLoader;\nimport android.content.Context;\n\nimport android.database.Cursor;\nimport android.provider.ContactsContract;\n\nimport java.util.ArrayList;\nimport java.util.Collection;\nimport java.util.Collections;\nimport java.util.Comparator;\nimport java.util.HashSet;\nimport java.util.List;\nimport java.util.Set;\n\npublic class ProviderClass {\n\n    private final Context mContext;\n\n    public ProviderClass(Context context) {\n\n        this.mContext = context;\n    }\n\n   public List<ContactPeople> getContactsDisplay() {\n\n       String[] projectionFields = new String[]{ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,\n               ContactsContract.CommonDataKinds.Phone.NUMBER,\n               ContactsContract.CommonDataKinds.Phone.PHOTO_THUMBNAIL_URI};\n\n       CursorLoader cursorLoader = new CursorLoader(mContext,\n               ContactsContract.CommonDataKinds.Phone.CONTENT_URI, // URI\n               projectionFields, // projection fields\n               null, // the selection criteria\n               null, // the selection args\n               null // the sort order\n       );\n\n       Cursor cursor = cursorLoader.loadInBackground();\n\n       Set<ContactPeople> contacts = new HashSet<>();\n\n       // Check if cursor is NULL. If TRUE - Move the cursor to first.\n       List<ContactPeople> list = null;\n       if (cursor != null && cursor.moveToFirst()) {\n\n           do {\n               ContactPeople item = new ContactPeople();\n\n               item.setName(cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME)));\n               item.setPhone(cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)));\n               item.setmPhotoURI(cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.PHOTO_THUMBNAIL_URI)));\n\n               contacts.add(item);\n\n           } while (cursor.moveToNext());\n\n           list = new ArrayList<ContactPeople>();\n           list.addAll(contacts);\n           list = sortContacts(list);\n\n           cursor.close();\n       }\n       return list;\n   }\n\n    private List<ContactPeople> sortContacts(List<ContactPeople> contacts) {\n\n        if (contacts.size() > 0) {\n                Collections.sort(contacts, new Comparator<ContactPeople>() {\n                    @Override\n                    public int compare(final ContactPeople object1, final ContactPeople object2) {\n                        return object1.getName().compareTo(object2.getName());\n                    }\n                });\n            }\n        return contacts;\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/zivdrag/contactapplication/ProviderClass.java	(revision 726bcb4ae98694fb0a1657879c5aeefb8df940b6)
++++ app/src/main/java/com/example/zivdrag/contactapplication/ProviderClass.java	(date 1524568517060)
+@@ -2,12 +2,9 @@
+ 
+ import android.support.v4.content.CursorLoader;
+ import android.content.Context;
+-
+ import android.database.Cursor;
+ import android.provider.ContactsContract;
+-
+ import java.util.ArrayList;
+-import java.util.Collection;
+ import java.util.Collections;
+ import java.util.Comparator;
+ import java.util.HashSet;
+@@ -30,15 +27,14 @@
+                ContactsContract.CommonDataKinds.Phone.PHOTO_THUMBNAIL_URI};
+ 
+        CursorLoader cursorLoader = new CursorLoader(mContext,
+-               ContactsContract.CommonDataKinds.Phone.CONTENT_URI, // URI
+-               projectionFields, // projection fields
+-               null, // the selection criteria
+-               null, // the selection args
+-               null // the sort order
+-       );
++               ContactsContract.CommonDataKinds.Phone.CONTENT_URI, projectionFields,null, null, null);
+ 
+        Cursor cursor = cursorLoader.loadInBackground();
+ 
++       String NAME = ContactsContract.Contacts.DISPLAY_NAME;
++       String NUMBER = ContactsContract.CommonDataKinds.Phone.NUMBER;
++       String PHOTO = ContactsContract.CommonDataKinds.Phone.PHOTO_THUMBNAIL_URI;
++
+        Set<ContactPeople> contacts = new HashSet<>();
+ 
+        // Check if cursor is NULL. If TRUE - Move the cursor to first.
+@@ -48,9 +44,9 @@
+            do {
+                ContactPeople item = new ContactPeople();
+ 
+-               item.setName(cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME)));
+-               item.setPhone(cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)));
+-               item.setmPhotoURI(cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.PHOTO_THUMBNAIL_URI)));
++               item.setName(cursor.getString(cursor.getColumnIndex(NAME)));
++               item.setPhone(cursor.getString(cursor.getColumnIndex(NUMBER)));
++               item.setmPhotoURI(cursor.getString(cursor.getColumnIndex(PHOTO)));
+ 
+                contacts.add(item);
+ 
