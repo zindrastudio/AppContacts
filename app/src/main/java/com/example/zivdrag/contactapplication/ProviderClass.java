@@ -30,14 +30,13 @@ public class ProviderClass {
                ContactsContract.CommonDataKinds.Phone.PHOTO_THUMBNAIL_URI};
 
        CursorLoader cursorLoader = new CursorLoader(mContext,
-               ContactsContract.CommonDataKinds.Phone.CONTENT_URI, // URI
-               projectionFields, // projection fields
-               null, // the selection criteria
-               null, // the selection args
-               null // the sort order
-       );
+               ContactsContract.CommonDataKinds.Phone.CONTENT_URI, projectionFields, null, null, null);
 
        Cursor cursor = cursorLoader.loadInBackground();
+
+       String NAME = ContactsContract.Contacts.DISPLAY_NAME;
+       String PHONE = ContactsContract.CommonDataKinds.Phone.NUMBER;
+       String PHOTO = ContactsContract.CommonDataKinds.Phone.PHOTO_THUMBNAIL_URI;
 
        Set<ContactPeople> contacts = new HashSet<>();
 
@@ -48,9 +47,9 @@ public class ProviderClass {
            do {
                ContactPeople item = new ContactPeople();
 
-               item.setName(cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME)));
-               item.setPhone(cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)));
-               item.setmPhotoURI(cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.PHOTO_THUMBNAIL_URI)));
+               item.setName(cursor.getString(cursor.getColumnIndex(NAME)));
+               item.setPhone(cursor.getString(cursor.getColumnIndex(PHONE)));
+               item.setmPhotoURI(cursor.getString(cursor.getColumnIndex(PHOTO)));
 
                contacts.add(item);
 
