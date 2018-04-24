@@ -7,6 +7,9 @@ public class ContactPeople implements Parcelable {
 
     private String mName, mPhone, mPhotoURI;
 
+    public ContactPeople(){
+    }
+
     public ContactPeople(String name, String phone, String photoURI){
 
         this.mPhone = phone;
