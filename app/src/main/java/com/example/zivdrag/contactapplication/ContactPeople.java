@@ -7,24 +7,17 @@ public class ContactPeople implements Parcelable {
 
     private String mName, mPhone, mPhotoURI;
 
-    public ContactPeople(){
-   // ne treba space, zasto si stavio prazan konstruktor? :)
-    }
-
     public ContactPeople(String name, String phone, String photoURI){
 
         this.mPhone = phone;
         this.mName = name;
         this.mPhotoURI = photoURI;
-
     }
-
     protected ContactPeople(Parcel in) {
         mName = in.readString();
         mPhone = in.readString();
         mPhotoURI = in.readString();
     }
-
     public static final Creator<ContactPeople> CREATOR = new Creator<ContactPeople>() {
         @Override
         public ContactPeople createFromParcel(Parcel in) {
@@ -89,7 +82,6 @@ public class ContactPeople implements Parcelable {
         dest.writeString(mName);
         dest.writeString(mPhone);
         dest.writeString(mPhotoURI);
-
     }
 
     public static final Parcelable.Creator<ContactPeople> CREATE = new Parcelable.Creator<ContactPeople>() {

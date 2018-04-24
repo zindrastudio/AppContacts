@@ -21,7 +21,6 @@ public class MainActivity extends FragmentActivity {
     private RecyclerView.LayoutManager mLayoutManager;
     private ProviderClass mProvider;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +32,6 @@ public class MainActivity extends FragmentActivity {
     private void initComponent() {
         mRecyclerView = findViewById(R.id.recyclerviewContacts);
         mProvider = new ProviderClass(this);
-
     }
 
     private void loadContacts() {
@@ -54,11 +52,9 @@ public class MainActivity extends FragmentActivity {
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
 
         if (requestCode == PERMISSION_REQ) {
-
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // Permission is OK
                 loadContacts();
-
             } else {
                 Snackbar.make(findViewById(android.R.id.content), "You need to grant permission",Snackbar.LENGTH_LONG).show();
             }

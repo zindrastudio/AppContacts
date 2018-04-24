@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import java.util.List;
 
 class ContactsRecyclerAdapter extends RecyclerView.Adapter<ContactsRecyclerAdapter.ContactViewHolder>{
@@ -18,13 +17,10 @@ class ContactsRecyclerAdapter extends RecyclerView.Adapter<ContactsRecyclerAdapt
     private Context mContext;
     private FragmentManager mManager;
 
-
     public ContactsRecyclerAdapter(List<ContactPeople> list, Context mContext, FragmentManager manager){
         this.mList = list;
         this.mContext = mContext;
         this.mManager = manager;
-
-
     }
 
     @Override
@@ -34,7 +30,6 @@ class ContactsRecyclerAdapter extends RecyclerView.Adapter<ContactsRecyclerAdapt
         ContactViewHolder contactViewHolder = new ContactViewHolder(view);
         return contactViewHolder;
     }
-
     @Override
     public void onBindViewHolder(final ContactViewHolder holder, final int position) {
 
@@ -45,10 +40,8 @@ class ContactsRecyclerAdapter extends RecyclerView.Adapter<ContactsRecyclerAdapt
 
         holder.mLayout.setOnClickListener(new View.OnClickListener() {
 
-
             @Override
             public void onClick(View view) {
-
                 Fragment fragment = new ContactScreenFragment();
 
                 Bundle bundle = new Bundle();
@@ -66,8 +59,8 @@ class ContactsRecyclerAdapter extends RecyclerView.Adapter<ContactsRecyclerAdapt
     }
     public static class ContactViewHolder extends RecyclerView.ViewHolder{
 
-        View mLayout;
-        TextView txtDisplay;
+        private View mLayout;
+        private TextView txtDisplay;
 
         public ContactViewHolder(View itemView) {
             super(itemView);

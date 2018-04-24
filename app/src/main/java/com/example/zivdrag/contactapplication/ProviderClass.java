@@ -2,12 +2,9 @@ package com.example.zivdrag.contactapplication;
 
 import android.support.v4.content.CursorLoader;
 import android.content.Context;
-
 import android.database.Cursor;
 import android.provider.ContactsContract;
-
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -19,10 +16,8 @@ public class ProviderClass {
     private final Context mContext;
 
     public ProviderClass(Context context) {
-
         this.mContext = context;
     }
-
    public List<ContactPeople> getContactsDisplay() {
 
        String[] projectionFields = new String[]{ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
@@ -46,11 +41,9 @@ public class ProviderClass {
 
            do {
                ContactPeople item = new ContactPeople();
-
                item.setName(cursor.getString(cursor.getColumnIndex(NAME)));
                item.setPhone(cursor.getString(cursor.getColumnIndex(PHONE)));
                item.setmPhotoURI(cursor.getString(cursor.getColumnIndex(PHOTO)));
-
                contacts.add(item);
 
            } while (cursor.moveToNext());
@@ -63,7 +56,6 @@ public class ProviderClass {
        }
        return list;
    }
-
     private List<ContactPeople> sortContacts(List<ContactPeople> contacts) {
 
         if (contacts.size() > 0) {
